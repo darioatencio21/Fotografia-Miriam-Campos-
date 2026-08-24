@@ -1,0 +1,67 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: mc-db
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER:-miriam}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Falta POSTGRES_PASSWORD en .env}"
+      POSTGRES_DB: "${POSTGRES_DB:-miriam_campos}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-miriam} -d ${POSTGRES_DB:-miriam_campos}"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    # ports:
+    #   - "5433:5432"
+
+  api:
+    build: ./api
+    container_name: mc-api
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      DATABASE_URL: "postgres://${POSTGRES_USER:-miriam}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-miriam_campos}"
+      SMTP_HOST: smtp.resend.com
+      SMTP_PORT: "587"
+      SMTP_USER: resend
+      SMTP_PASS: "${SMTP_PASS:-}"
+      MAIL_FROM: "Miriam Tellez <onboarding@resend.dev>"
+      PHOTOGRAPHER_EMAIL: "${PHOTOGRAPHER_EMAIL:-hola@miriamtellez.photo}"
+      ADMIN_KEY: "${ADMIN_KEY:?Falta ADMIN_KEY en .env}"
+      UPLOAD_DIR: /app/uploads
+    volumes:
+      - uploads:/app/uploads
+    ports:
+      # Solo accesible desde esta máquina; el tráfico público pasa por nginx.
+      - "127.0.0.1:4000:4000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:4000/api/health >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+      start_period: 5s
+
+  web:
+    build: ./web
+    container_name: mc-web
+    ports:
+      - "3000:80"
+    depends_on:
+      api:
+        condition: service_healthy
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mc-mailpit
+    ports:
+      - "127.0.0.1:8025:8025"
+
+volumes:
+  pgdata:
+  uploads:

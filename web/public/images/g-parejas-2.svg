@@ -1,0 +1,27 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F6DFC0"/>
+      <stop offset="0.6" stop-color="#E39A6B"/>
+      <stop offset="1" stop-color="#A65B52"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#FFF7E0" stop-opacity="0.95"/>
+      <stop offset="0.42" stop-color="#FFE9BD" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#FFE9BD" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 0.97  0 0 0 0 0.9  0 0 0 0.07 0"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#sky)"/>
+  <circle cx="600" cy="378" r="135" fill="#FFF6DE" opacity="0.95"/>
+  <rect width="1200" height="900" fill="url(#glow)"/>
+  <path d="M0,576 C264,506 576,626 1200,552 L1200,900 L0,900 Z" fill="#7E4A44" opacity="0.55"/>
+  <path d="M0,720 Q336,640 624,710 T1200,670 L1200,900 L0,900 Z" fill="#3E2626" opacity="0.88"/>
+  <rect width="1200" height="900" filter="url(#grain)"/>
+  <g font-family="Georgia, serif">
+    <text x="56" y="770" font-size="28" letter-spacing="10" fill="rgba(255,250,240,0.88)">PAREJAS</text>
+    <text x="54" y="842" font-size="64" font-style="italic" fill="rgba(255,250,240,0.5)">02</text>
+  </g></svg>

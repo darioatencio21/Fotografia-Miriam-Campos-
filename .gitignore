@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env
+*.log
+.DS_Store
+
+# Archivos personales / material fuente (fuera del repo)
+fotos miriam/
+Coursera CJNNE735XHVM.pdf
+foto miriam profile.jpg
+foto profile miriam nuevo.png
+logo miriam tellez.png
+
+# Configuración local del asistente
+.opencode/

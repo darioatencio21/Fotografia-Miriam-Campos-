@@ -1,0 +1,27 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FAEDC8"/>
+      <stop offset="0.6" stop-color="#EFBF74"/>
+      <stop offset="1" stop-color="#C88A4A"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.68" cy="0.26" r="0.6">
+      <stop offset="0" stop-color="#FFF7E0" stop-opacity="0.95"/>
+      <stop offset="0.42" stop-color="#FFE9BD" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#FFE9BD" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 0.97  0 0 0 0 0.9  0 0 0 0.07 0"/>
+    </filter>
+  </defs>
+  <rect width="900" height="1200" fill="url(#sky)"/>
+  <circle cx="612" cy="312" r="135" fill="#FFF6DE" opacity="0.95"/>
+  <rect width="900" height="1200" fill="url(#glow)"/>
+  <path d="M0,768 C198,698 432,818 900,744 L900,1200 L0,1200 Z" fill="#8F7A46" opacity="0.55"/>
+  <path d="M0,960 Q252,880 468,950 T900,910 L900,1200 L0,1200 Z" fill="#4E3B22" opacity="0.88"/>
+  <rect width="900" height="1200" filter="url(#grain)"/>
+  <g font-family="Georgia, serif">
+    <text x="56" y="1070" font-size="28" letter-spacing="10" fill="rgba(255,250,240,0.88)">FAMILIAS</text>
+    <text x="54" y="1142" font-size="64" font-style="italic" fill="rgba(255,250,240,0.5)">01</text>
+  </g></svg>
