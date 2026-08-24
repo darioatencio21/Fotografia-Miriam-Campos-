@@ -1,0 +1,6 @@
+# Dominio definido en .env del servidor (SITE_DOMAIN).
+# Caddy emite y renueva el certificado HTTPS automáticamente cuando
+# el DNS del dominio apunte a la IP del VPS.
+{$SITE_DOMAIN} {
+	reverse_proxy web:80
+}

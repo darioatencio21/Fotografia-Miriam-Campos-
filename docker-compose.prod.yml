@@ -1,0 +1,37 @@
+# Override de producción para el VPS. Uso:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+# Requiere SITE_DOMAIN en .env (el dominio real). El flujo local no cambia:
+#   docker compose up -d --build
+
+services:
+  db:
+    restart: unless-stopped
+
+  api:
+    restart: unless-stopped
+
+  web:
+    restart: unless-stopped
+    # En producción el tráfico entra solo por Caddy (80/443).
+    ports: !override []
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: mc-caddy
+    restart: unless-stopped
+    environment:
+      SITE_DOMAIN: "${SITE_DOMAIN:?Falta SITE_DOMAIN en .env}"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - web
+
+volumes:
+  caddy_data:
+  caddy_config:

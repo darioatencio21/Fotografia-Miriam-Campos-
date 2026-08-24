@@ -54,9 +54,27 @@ Para detenerlo: `docker compose down`. Los datos persisten en volúmenes de Dock
 - Bilingüe completo ES/EN, botón flotante de WhatsApp, SEO básico (Open Graph,
   `robots.txt`, `sitemap.xml`).
 
-## Producción (cuando haya dominio)
+## Producción (VPS + dominio)
 
-- Servir detrás de HTTPS (reverse proxy del hosting o Certbot).
-- Actualizar el dominio canónico en `web/index.html`, `robots.txt` y
-  `sitemap.xml`.
-- Configurar credenciales SMTP reales en `.env` (`SMTP_PASS`).
+El repo ya incluye todo para un VPS barato (~$5/mes):
+
+- `docker-compose.prod.yml`: override que añade **Caddy** (HTTPS automático,
+  puertos 80/443) y reinicio automático de contenedores.
+- `Caddyfile`: dominio definido en `.env` como `SITE_DOMAIN`.
+- `deploy/backup.sh` / `restore.sh`: respaldo diario de la BD (retención 14
+  días) y restauración. Cron sugerido dentro del script.
+- `.github/workflows/deploy.yml`: despliegue por SSH en cada push (activar
+  tras configurar los secrets del VPS).
+
+### El día D
+
+1. Comprar VPS (Ubuntu 24.04) y dominio; apuntar el registro A a la IP.
+2. En el VPS: instalar Docker, clonar el repo y crear `.env` con valores
+   fuertes (`ADMIN_KEY`, `POSTGRES_PASSWORD`, `SITE_DOMAIN`, `SMTP_PASS`).
+3. Levantar:
+   ```bash
+   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+   ```
+4. Caddy emite el certificado HTTPS solo cuando el DNS responde al servidor.
+5. Migrar datos locales: `pg_dump` de la BD local y copia del volumen de fotos.
+6. Configurar secrets de Actions para despliegues automáticos.

@@ -13,3 +13,6 @@ logo miriam tellez.png
 
 # Configuración local del asistente
 .opencode/
+
+# Respaldos de base de datos (generados en el VPS)
+backups/
