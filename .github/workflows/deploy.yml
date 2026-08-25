@@ -1,19 +1,9 @@
-# Despliegue automático al VPS.
-#
-# PENDIENTE cuando compres el VPS:
-#   1) En GitHub: Settings → Secrets and variables → Actions, crea:
-#      VPS_HOST (IP del servidor), VPS_USER (usuario SSH),
-#      VPS_SSH_KEY (clave privada) y VPS_PROJECT_DIR (ruta del repo en el VPS).
-#   2) Descomenta el bloque "on: push" de abajo.
-#
-# Mientras tanto el despliegue es manual desde la pestaña Actions.
-
 name: Deploy al VPS
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [main]
+  push:
+    branches: [main]
 
 jobs:
   deploy:
@@ -25,6 +15,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22022
           script: |
             cd ${{ secrets.VPS_PROJECT_DIR }}
             git pull --ff-only
