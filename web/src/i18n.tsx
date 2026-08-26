@@ -111,8 +111,10 @@ const en = {
     errName: 'Please write your full name (2–25 characters).',
     errEmail: 'That email does not look right (max 30 characters).',
     errPhone: 'Enter a valid US phone number (10 digits, optional +1).',
+    errPhoneRequired: 'Please enter your phone number.',
     errSession: 'Pick a session type.',
     errMessage: 'Tell me a bit more in your message (10–150 characters).',
+    errDateRequired: 'Please select a preferred date.',
     genericError: 'We could not send your message. Please try again.',
     dateTaken: 'Heads up: that date is already taken. Please choose another day if you can.',
     termsSummary:
@@ -432,8 +434,10 @@ const es: Dictionary = {
     errName: 'Escribe tu nombre completo (2–25 caracteres).',
     errEmail: 'El correo no parece válido (máximo 30 caracteres).',
     errPhone: 'Ingresa un teléfono válido de EE.UU. (10 dígitos, +1 opcional).',
+    errPhoneRequired: 'Ingresa tu número de teléfono.',
     errSession: 'Selecciona el tipo de sesión.',
     errMessage: 'Cuéntame un poco más en tu mensaje (10–150 caracteres).',
+    errDateRequired: 'Selecciona una fecha tentativa.',
     genericError: 'No pudimos enviar tu mensaje. Intenta de nuevo.',
     dateTaken: 'Ojo: esa fecha ya está reservada. Elige otro día si puedes.',
     termsSummary:

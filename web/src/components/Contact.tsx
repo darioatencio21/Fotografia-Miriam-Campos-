@@ -71,7 +71,9 @@ export default function Contact({ services }: { services: Service[] }) {
 
     if (name.length < 2 || name.length > LIMITS.name) errs.push(t.contact.errName);
     if (!EMAIL_RE.test(email) || email.length > LIMITS.email) errs.push(t.contact.errEmail);
-    if (phone && !isValidUSPhone(phone)) errs.push(t.contact.errPhone);
+    if (!phone) errs.push(t.contact.errPhoneRequired);
+    else if (!isValidUSPhone(phone)) errs.push(t.contact.errPhone);
+    if (!form.eventDate) errs.push(t.contact.errDateRequired);
     if (!form.sessionType) errs.push(t.contact.errSession);
     if (message.length < 10 || message.length > LIMITS.message) errs.push(t.contact.errMessage);
     if (!form.termsAccepted) errs.push(t.contact.errTerms);
@@ -90,12 +92,12 @@ export default function Contact({ services }: { services: Service[] }) {
       await sendInquiry({
         name: form.name.trim(),
         email: form.email.trim(),
-        phone: form.phone.trim() || undefined,
+        phone: form.phone.trim(),
         sessionType:
           form.sessionType === 'other'
             ? t.contact.other
             : serviceTitle(form.sessionType) || form.sessionType,
-        eventDate: form.eventDate || undefined,
+        eventDate: form.eventDate,
         message: form.message.trim(),
         lang,
         website: form.website,
@@ -129,7 +131,7 @@ export default function Contact({ services }: { services: Service[] }) {
               </li>
               <li>
                 <span className="contact-info-label">{t.contact.phone}</span>
-                <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                <a href="tel:+15597561144">+1 (559) 756-1144</a>
               </li>
               <li>
                 <span className="contact-info-label">{t.contact.area}</span>
@@ -180,7 +182,7 @@ export default function Contact({ services }: { services: Service[] }) {
 
               <div className="field-row">
                 <label className="field">
-                  <span>{t.contact.phoneField}</span>
+                  <span>{t.contact.phoneField} *</span>
                   <input
                     type="tel"
                     maxLength={LIMITS.phone}
@@ -191,7 +193,7 @@ export default function Contact({ services }: { services: Service[] }) {
                   />
                 </label>
                 <label className="field">
-                  <span>{t.contact.date}</span>
+                  <span>{t.contact.date} *</span>
                   <input
                     type="date"
                     min={new Date().toISOString().slice(0, 10)}
