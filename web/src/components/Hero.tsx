@@ -2,12 +2,18 @@ import { useEffect, useState } from 'react';
 import { useLang } from '../i18n';
 
 const SLIDES = [
-  { src: '/images/hero/hero-maternidad.jpg', alt_en: 'Maternity session at golden hour', alt_es: 'Sesión de maternidad en hora dorada' },
-  { src: '/images/hero/hero-familias.jpg', alt_en: 'Family photography outdoors', alt_es: 'Fotografía familiar al aire libre' },
-  { src: '/images/hero/hero-bodas.jpg', alt_en: 'Wedding photography', alt_es: 'Fotografía de bodas' },
-  { src: '/images/hero/hero-quinceanera.jpg', alt_en: 'Quinceañera portrait session', alt_es: 'Sesión de quinceañera' },
-  { src: '/images/hero/hero-graduaciones.jpg', alt_en: 'Graduation photos', alt_es: 'Fotos de graduación' },
-  { src: '/images/hero/hero-engagement.jpg', alt_en: 'Engagement session', alt_es: 'Sesión de compromiso' },
+  {
+    left: { src: '/images/hero/hero-maternidad.jpg', alt_en: 'Maternity session at golden hour', alt_es: 'Sesión de maternidad en hora dorada' },
+    right: { src: '/images/hero/hero-familias.jpg', alt_en: 'Family photography outdoors', alt_es: 'Fotografía familiar al aire libre' },
+  },
+  {
+    left: { src: '/images/hero/hero-bodas.jpg', alt_en: 'Wedding photography', alt_es: 'Fotografía de bodas' },
+    right: { src: '/images/hero/hero-quinceanera.jpg', alt_en: 'Quinceañera portrait session', alt_es: 'Sesión de quinceañera' },
+  },
+  {
+    left: { src: '/images/hero/hero-graduaciones.jpg', alt_en: 'Graduation photos', alt_es: 'Fotos de graduación' },
+    right: { src: '/images/hero/hero-engagement.jpg', alt_en: 'Engagement session', alt_es: 'Sesión de compromiso' },
+  },
 ];
 
 const INTERVAL = 5000;
@@ -26,13 +32,20 @@ export default function Hero() {
   return (
     <section className="hero" id="inicio">
       {SLIDES.map((slide, i) => (
-        <img
-          key={slide.src}
-          className={`hero-slide${i === active ? ' active' : ''}`}
-          src={slide.src}
-          alt={lang === 'en' ? slide.alt_en : slide.alt_es}
-          aria-hidden="true"
-        />
+        <div key={i} className={`hero-slide${i === active ? ' active' : ''}`}>
+          <img
+            className="hero-slide-left"
+            src={slide.left.src}
+            alt={lang === 'en' ? slide.left.alt_en : slide.left.alt_es}
+            aria-hidden="true"
+          />
+          <img
+            className="hero-slide-right"
+            src={slide.right.src}
+            alt={lang === 'en' ? slide.right.alt_en : slide.right.alt_es}
+            aria-hidden="true"
+          />
+        </div>
       ))}
       <div className="hero-glow" aria-hidden="true" />
       <div className="container hero-content">

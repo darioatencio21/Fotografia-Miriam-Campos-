@@ -319,9 +319,9 @@ button {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--ink);
-  opacity: 0.78;
-  transition: opacity 0.2s ease;
+  color: var(--honey);
+  opacity: 1;
+  transition: opacity 0.2s ease, color 0.3s ease;
 }
 
 .header-nav a::after {
@@ -338,11 +338,20 @@ button {
 }
 
 .header-nav a:hover {
-  opacity: 1;
+  opacity: 0.8;
 }
 
 .header-nav a:hover::after {
   transform: scaleX(1);
+}
+
+.site-header.is-scrolled .header-nav a {
+  color: var(--ink);
+  opacity: 0.78;
+}
+
+.site-header.is-scrolled .header-nav a:hover {
+  opacity: 1;
 }
 
 .header-actions {
@@ -572,20 +581,24 @@ button {
 .hero-slide {
   position: absolute;
   inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
+  display: flex;
+  gap: 2px;
   margin: 0;
   padding: 0;
-  object-fit: cover;
   opacity: 0;
   transition: opacity 1.2s ease-in-out;
   z-index: 0;
-  filter: blur(0.5px) saturate(1.05);
 }
 
 .hero-slide.active {
   opacity: 1;
+}
+
+.hero-slide img {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  object-fit: cover;
 }
 
 .hero::after {
@@ -1882,21 +1895,23 @@ button {
   }
 }
 
-/* Desktop: limitar imagen del hero a 1600px centrada */
+/* Desktop: fondo oscuro detrás del hero */
 @media (min-width: 1024px) {
   .hero {
     background-color: var(--ink);
   }
-
-  .hero-slide {
-    max-width: 1600px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
 }
 
-/* Mobile: bajar el bloque de texto del hero */
+/* Mobile: solo 1 imagen + bajar texto */
 @media (max-width: 768px) {
+  .hero-slide-right {
+    display: none;
+  }
+
+  .hero-slide img {
+    height: 100%;
+  }
+
   .hero-content {
     padding-top: 35vh;
   }
