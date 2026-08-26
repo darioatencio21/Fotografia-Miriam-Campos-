@@ -1882,6 +1882,26 @@ button {
   }
 }
 
+/* Desktop: limitar imagen del hero a 1600px centrada */
+@media (min-width: 1024px) {
+  .hero {
+    background-color: var(--ink);
+  }
+
+  .hero-slide {
+    max-width: 1600px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* Mobile: bajar el bloque de texto del hero */
+@media (max-width: 768px) {
+  .hero-content {
+    padding-top: 35vh;
+  }
+}
+
 @media (max-height: 500px) and (orientation: landscape) {
   .hero-content {
     padding-top: 90px;
