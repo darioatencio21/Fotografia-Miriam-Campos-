@@ -16,6 +16,7 @@ const initialForm = {
   eventDate: '',
   message: '',
   website: '',
+  termsAccepted: false,
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -73,6 +74,7 @@ export default function Contact({ services }: { services: Service[] }) {
     if (phone && !isValidUSPhone(phone)) errs.push(t.contact.errPhone);
     if (!form.sessionType) errs.push(t.contact.errSession);
     if (message.length < 10 || message.length > LIMITS.message) errs.push(t.contact.errMessage);
+    if (!form.termsAccepted) errs.push(t.contact.errTerms);
     return errs;
   }
 
@@ -99,7 +101,7 @@ export default function Contact({ services }: { services: Service[] }) {
         website: form.website,
       });
       setStatus('success');
-      setForm(initialForm);
+      setForm({ ...initialForm, termsAccepted: false });
     } catch {
       setStatus('error');
       setServerError(true);
@@ -258,6 +260,30 @@ export default function Contact({ services }: { services: Service[] }) {
                   value={form.website}
                   onChange={update('website')}
                 />
+              </label>
+
+              <div className="terms-summary">
+                <p className="terms-summary-title">{t.contact.termsSummary}</p>
+                <ul className="terms-summary-list">
+                  <li>{t.contact.termsDeposit}</li>
+                  <li>{t.contact.termsTravel}</li>
+                  <li>{t.contact.termsCancel}</li>
+                  <li>{t.contact.termsReschedule}</li>
+                </ul>
+                <a className="terms-summary-link" href="/terminos">
+                  {t.contact.termsLink}
+                </a>
+              </div>
+
+              <label className="terms-checkbox">
+                <input
+                  type="checkbox"
+                  checked={form.termsAccepted}
+                  onChange={(e) =>
+                    setForm((prev) => ({ ...prev, termsAccepted: e.target.checked }))
+                  }
+                />
+                <span>{t.contact.termsCheckbox}</span>
               </label>
 
               <button

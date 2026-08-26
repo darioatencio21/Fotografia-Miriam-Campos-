@@ -88,7 +88,7 @@ const en = {
     email: 'Email',
     phone: 'Phone',
     area: 'Area',
-    areaValue: 'Central Valley, CA — available to travel',
+    areaValue: 'Porterville, CA — available to travel',
     name: 'Full name *',
     namePlaceholder: 'Your name',
     emailField: 'Email *',
@@ -115,6 +115,18 @@ const en = {
     errMessage: 'Tell me a bit more in your message (10–150 characters).',
     genericError: 'We could not send your message. Please try again.',
     dateTaken: 'Heads up: that date is already taken. Please choose another day if you can.',
+    termsSummary:
+      'By sending this request you acknowledge the terms and conditions of service:',
+    termsDeposit: 'A 30% deposit is required to confirm your session.',
+    termsTravel:
+      'Travel and lodging expenses for distant locations are the client\'s responsibility.',
+    termsCancel:
+      'Cancellations must be made at least 48 hours in advance; otherwise the deposit is forfeited.',
+    termsReschedule:
+      'You may reschedule once at no cost with at least 48 hours\' notice.',
+    termsCheckbox: 'I have read and accept the terms and conditions *',
+    errTerms: 'You must accept the terms and conditions to continue.',
+    termsLink: 'Read full terms and conditions',
   },
   footer: {
     eyebrow: 'One last thing',
@@ -123,7 +135,7 @@ const en = {
     navigate: 'Navigate',
     igEyebrow: 'Follow the light',
     writeMe: 'Write me',
-    tagline: 'Lifestyle photography at golden hour. Central Valley, CA — available to travel.',
+    tagline: 'Lifestyle photography at golden hour. Porterville, CA — available to travel.',
     rightsTemplate: '{year} Miriam Tellez · All rights reserved',
     madeWith: 'Made with sunset light',
   },
@@ -143,7 +155,7 @@ const en = {
       },
       {
         q: 'Where do sessions take place?',
-        a: "Around California's Central Valley: open fields, parks, lakeside spots… I suggest locations based on the season and the golden-hour light. I am available to travel too.",
+        a: "Around Porterville and California's Central Valley: open fields, parks, lakeside spots… I suggest locations based on the season and the golden-hour light. I am available to travel too.",
       },
       {
         q: "What if my kids don't cooperate?",
@@ -151,9 +163,39 @@ const en = {
       },
       {
         q: 'How do I book my date?',
-        a: "Send your request through the contact form and I will confirm availability within 24 hours. A small deposit saves your date; the balance is due the day of the session.",
+        a: "Send your request through the contact form and I will confirm availability within 24 hours. A 30% deposit saves your date; the balance is due the day of the session. Travel and lodging costs for distant locations are the client's responsibility.",
       },
     ],
+  },
+  terms: {
+    title: 'Terms & Conditions',
+    intro:
+      'Please read the following terms carefully before booking a session with Miriam Tellez Photography.',
+    s1Title: '1. Deposit & Payment',
+    s1:
+      'A 30% deposit is required to confirm and reserve your session date. The remaining 70% is due on the day of the session, before or during the shoot. Deposits can be paid via Zelle, Venmo, or cash.',
+    s2Title: '2. Travel & Lodging',
+    s2:
+      'Sessions located outside the Porterville, CA area may require travel and/or lodging expenses. These costs are the sole responsibility of the client and will be quoted in advance before confirming the booking.',
+    s3Title: '3. Cancellation Policy',
+    s3:
+      'Cancellations must be made at least 48 hours before the scheduled session. If a cancellation is made within 48 hours of the session, the 30% deposit will be forfeited and is non-refundable.',
+    s4Title: '4. Rescheduling',
+    s4:
+      'You may reschedule your session once at no additional cost, provided you give at least 48 hours\' notice. Additional reschedules may be subject to a new deposit.',
+    s5Title: '5. No-Show',
+    s5:
+      'If the client does not show up to the scheduled session without prior notice, the full deposit will be forfeited.',
+    s6Title: '6. Delivery',
+    s6:
+      'Edited photos are delivered via a private online gallery within 2 weeks of the session (4 weeks for weddings and large events). The gallery link remains active for 30 days.',
+    s7Title: '7. Usage Rights',
+    s7:
+      'The client receives a personal, non-commercial license to print and share the delivered photos. Miriam Tellez Photography retains the right to use images for portfolio, social media, and marketing purposes unless the client requests otherwise in writing.',
+    s8Title: '8. Liability',
+    s8:
+      'In the unlikely event of equipment failure or unforeseen circumstances that prevent the session from taking place, a full refund of the deposit will be issued or the session will be rescheduled at no cost.',
+    back: '← Back to site',
   },
   review: {
     formTitle: 'Share your experience',
@@ -367,7 +409,7 @@ const es: Dictionary = {
     email: 'Correo',
     phone: 'Teléfono',
     area: 'Zona',
-    areaValue: 'Central Valley, CA — disponible para viajar',
+    areaValue: 'Porterville, CA — disponible para viajar',
     name: 'Nombre completo *',
     namePlaceholder: 'Tu nombre',
     emailField: 'Correo *',
@@ -394,6 +436,18 @@ const es: Dictionary = {
     errMessage: 'Cuéntame un poco más en tu mensaje (10–150 caracteres).',
     genericError: 'No pudimos enviar tu mensaje. Intenta de nuevo.',
     dateTaken: 'Ojo: esa fecha ya está reservada. Elige otro día si puedes.',
+    termsSummary:
+      'Al enviar esta solicitud aceptas los términos y condiciones del servicio:',
+    termsDeposit: 'Se requiere un anticipo del 30% para confirmar tu sesión.',
+    termsTravel:
+      'Los gastos de traslado y hospedaje en ubicaciones lejanas van por cuenta del cliente.',
+    termsCancel:
+      'Las cancelaciones deben hacerse con al menos 48 horas de anticipación; de lo contrario se pierde el anticipo.',
+    termsReschedule:
+      'Puedes reprogramar una vez sin costo con al menos 48 horas de anticipación.',
+    termsCheckbox: 'He leído y acepto los términos y condiciones *',
+    errTerms: 'Debes aceptar los términos y condiciones para continuar.',
+    termsLink: 'Leer términos y condiciones completos',
   },
   footer: {
     eyebrow: 'Una última cosa',
@@ -402,7 +456,7 @@ const es: Dictionary = {
     navigate: 'Navega',
     igEyebrow: 'Sigue la luz',
     writeMe: 'Escríbeme',
-    tagline: 'Fotografía lifestyle en hora dorada. Central Valley, CA — disponible para viajar.',
+    tagline: 'Fotografía lifestyle en hora dorada. Porterville, CA — disponible para viajar.',
     rightsTemplate: '{year} Miriam Tellez · Todos los derechos reservados',
     madeWith: 'Hecho con luz de atardecer',
   },
@@ -422,7 +476,7 @@ const es: Dictionary = {
       },
       {
         q: '¿Dónde se realizan las sesiones?',
-        a: 'En el Central Valley de California: campos abiertos, parques, orillas del lago… Sugiero ubicaciones según la temporada y la luz de la hora dorada. También estoy disponible para viajar.',
+        a: 'En Porterville y el Central Valley de California: campos abiertos, parques, orillas del lago… Sugiero ubicaciones según la temporada y la luz de la hora dorada. También estoy disponible para viajar.',
       },
       {
         q: '¿Y si mis hijos no cooperan?',
@@ -430,9 +484,39 @@ const es: Dictionary = {
       },
       {
         q: '¿Cómo reservo mi fecha?',
-        a: 'Envía tu solicitud desde el formulario de contacto y confirmo disponibilidad en menos de 24 horas. Un anticipo pequeño aparta tu fecha; el resto se paga el día de la sesión.',
+        a: 'Envía tu solicitud desde el formulario de contacto y confirmo disponibilidad en menos de 24 horas. Un anticipo del 30% aparta tu fecha; el resto se paga el día de la sesión. Los gastos de traslado y hospedaje en ubicaciones lejanas van por cuenta del cliente.',
       },
     ],
+  },
+  terms: {
+    title: 'Términos y Condiciones',
+    intro:
+      'Por favor lee los siguientes términos con cuidado antes de reservar una sesión con Miriam Tellez Photography.',
+    s1Title: '1. Anticipo y pago',
+    s1:
+      'Se requiere un anticipo del 30% para confirmar y apartar la fecha de tu sesión. El 70% restante se paga el día de la sesión, antes o durante la fotografía. Los anticipos pueden hacerse por Zelle, Venmo o efectivo.',
+    s2Title: '2. Traslado y hospedaje',
+    s2:
+      'Las sesiones fuera del área de Porterville, CA pueden requerir gastos de traslado y/o hospedaje. Estos costos son responsabilidad del cliente y se cotizan por adelantado antes de confirmar la reserva.',
+    s3Title: '3. Política de cancelación',
+    s3:
+      'Las cancelaciones deben hacerse con al menos 48 horas de anticipación a la sesión programada. Si se cancela dentro de las 48 horas anteriores, el anticipo del 30% se pierde y no es reembolsable.',
+    s4Title: '4. Reprogramación',
+    s4:
+      'Puedes reprogramar tu sesión una vez sin costo adicional, siempre que avises con al menos 48 horas de anticipación. Reprogramaciones adicionales pueden requerir un nuevo anticipo.',
+    s5Title: '5. No show',
+    s5:
+      'Si el cliente no se presenta a la sesión programada sin aviso previo, se pierde el anticipo completo.',
+    s6Title: '6. Entrega',
+    s6:
+      'Las fotos editadas se entregan a través de una galería online privada dentro de 2 semanas de la sesión (4 semanas para bodas y eventos grandes). El enlace de la galería permanece activo por 30 días.',
+    s7Title: '7. Derechos de uso',
+    s7:
+      'El cliente recibe una licencia personal y no comercial para imprimir y compartir las fotos entregadas. Miriam Tellez Photography se reserva el derecho de usar las imágenes para su portafolio, redes sociales y fines de marketing, a menos que el cliente solicite lo contrario por escrito.',
+    s8Title: '8. Responsabilidad',
+    s8:
+      'En el improbable caso de una falla de equipo o circunstancias imprevistas que impidan la realización de la sesión, se emitirá un reembolso completo del anticipo o se reprogramará la sesión sin costo.',
+    back: '← Volver al sitio',
   },
   review: {
     formTitle: 'Comparte tu experiencia',

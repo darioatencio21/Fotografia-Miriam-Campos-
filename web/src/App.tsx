@@ -14,6 +14,7 @@ import Testimonials from './components/Testimonials';
 import Faq from './components/Faq';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Terms from './components/Terms';
 import AdminPage from './components/Admin/AdminPage';
 
 interface Content {
@@ -45,7 +46,8 @@ function Site() {
   const isServicesPage = route === '/servicios';
   const isTestimonialsPage = route === '/testimonios';
   const isBookingPage = route === '/reservar';
-  const isSubpage = isServicesPage || isTestimonialsPage || isBookingPage;
+  const isTermsPage = route === '/terminos';
+  const isSubpage = isServicesPage || isTestimonialsPage || isBookingPage || isTermsPage;
 
   useEffect(() => {
     let active = true;
@@ -66,8 +68,9 @@ function Site() {
     const base = 'Miriam Tellez Photography';
     if (isServicesPage) document.title = `${base} · ${t.nav.services}`;
     else if (isBookingPage) document.title = `${base} · ${t.bookCta}`;
+    else if (isTermsPage) document.title = `${base} · ${t.terms.title}`;
     else document.title = `${base} · ${t.nav.testimonials}`;
-  }, [isSubpage, isServicesPage, isBookingPage, t]);
+  }, [isSubpage, isServicesPage, isBookingPage, isTermsPage, t]);
 
   return (
     <>
@@ -82,6 +85,8 @@ function Site() {
           <Contact services={content.services} />
         ) : isTestimonialsPage ? (
           <Testimonials testimonials={content.testimonials} />
+        ) : isTermsPage ? (
+          <Terms />
         ) : (
           <>
             <Hero />
@@ -95,7 +100,7 @@ function Site() {
           </>
         )}
       </main>
-      {!isBookingPage && <Footer />}
+      {!isBookingPage && !isTermsPage && <Footer />}
       {loadError && (
         <div className="load-error" role="alert">
           {t.loadError}

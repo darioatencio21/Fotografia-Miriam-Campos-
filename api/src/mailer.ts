@@ -78,7 +78,7 @@ function layout(innerHtml: string): string {
 ${innerHtml}
 <tr><td style="padding:6px 34px 30px;border-top:1px solid rgba(46,33,21,0.12);margin-top:10px;">
   <p style="margin:16px 0 0;font-size:13px;line-height:1.7;color:#6e5b47;">
-    Central Valley, CA &middot; <a href="https://www.instagram.com/miriamtellezphotography/" style="color:#a96f15;">@miriamtellezphotography</a>
+    Porterville, CA &middot; <a href="https://www.instagram.com/miriamtellezphotography/" style="color:#a96f15;">@miriamtellezphotography</a>
   </p>
 </td></tr>
 </table>

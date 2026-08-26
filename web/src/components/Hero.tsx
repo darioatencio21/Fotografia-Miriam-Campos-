@@ -24,7 +24,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="hero-meta container" aria-hidden="true">
-        <span>Central Valley, CA</span>
+        <span>Porterville, CA</span>
         <span className="hero-meta-dot" />
         <span>{t.hero.travel}</span>
       </div>

@@ -1355,6 +1355,111 @@ button {
   color: var(--ink-soft);
 }
 
+/* ============ Terms & Conditions ============ */
+
+.terms-summary {
+  margin: 20px 0 16px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: var(--cream);
+  border: 1px solid rgba(46, 33, 21, 0.1);
+}
+
+.terms-summary-title {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.terms-summary-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.terms-summary-list li {
+  margin-bottom: 4px;
+}
+
+.terms-summary-list li:last-child {
+  margin-bottom: 0;
+}
+
+.terms-summary-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--honey);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.terms-summary-link:hover {
+  color: var(--ink);
+}
+
+.terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.terms-checkbox input[type='checkbox'] {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--honey);
+  flex-shrink: 0;
+}
+
+/* Terms page */
+
+.terms-container {
+  max-width: 720px;
+}
+
+.terms-intro {
+  margin-top: 14px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.terms-body {
+  margin-top: 36px;
+}
+
+.terms-body h2 {
+  margin: 28px 0 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.terms-body h2:first-child {
+  margin-top: 0;
+}
+
+.terms-body p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.terms-back {
+  display: inline-block;
+  margin-top: 40px;
+}
+
 .field input:focus-visible,
 .field select:focus-visible,
 .field textarea:focus-visible {
