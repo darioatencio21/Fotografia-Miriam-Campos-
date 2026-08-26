@@ -1,5 +1,4 @@
 import { useLang } from '../i18n';
-import { WHATSAPP_NUMBER } from './WhatsAppButton';
 
 function InstagramIcon() {
   return (
@@ -16,17 +15,6 @@ function InstagramIcon() {
       />
       <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" strokeWidth="1.8" />
       <circle cx="17.3" cy="6.7" r="1.35" fill="currentColor" />
-    </svg>
-  );
-}
-
-function WhatsAppIcon() {
-  return (
-    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-      <path
-        fill="currentColor"
-        d="M16 4C9.9 4 5 8.9 5 15c0 2.4.7 4.6 2.1 6.4L5.5 27l5.8-1.5c1.5.8 3 1.2 4.7 1.2 6.1 0 11-4.9 11-11S22.1 4 16 4zm0 20c-1.6 0-3-.4-4.3-1.1l-.3-.2-3.4.9.9-3.3-.2-.3C7.7 18.7 7 17 7 15c0-5 4-9 9-9s9 4 9 9-4 9-9 9zm5-6.7c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.2-.7.2-.2.3-.7 1-.9 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 3 1.2 3.2c.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.8.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"
-      />
     </svg>
   );
 }
@@ -60,7 +48,6 @@ export default function Footer() {
   const { t } = useLang();
   const year = new Date().getFullYear();
   const rights = t.footer.rightsTemplate.replace('{year}', String(year));
-  const waHref = `https://wa.me/${WHATSAPP_NUMBER}`;
 
   return (
     <footer className="site-footer">
@@ -114,17 +101,7 @@ export default function Footer() {
           </a>
           <a
             className="social-dot"
-            href={waHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={t.whatsappAria}
-            title={t.whatsappAria}
-          >
-            <WhatsAppIcon />
-          </a>
-          <a
-            className="social-dot"
-            href="mailto:hola@miriamtellez.photo"
+            href="mailto:miriamtellezphotography@gmail.com"
             aria-label={t.contact.email}
             title={t.contact.email}
           >

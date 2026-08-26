@@ -127,7 +127,7 @@ const en = {
     rightsTemplate: '{year} Miriam Tellez · All rights reserved',
     madeWith: 'Made with sunset light',
   },
-  whatsappAria: 'Chat with Miriam on WhatsApp',
+
   faq: {
     eyebrow: 'Frequent questions',
     titlePre: 'Everything you want to know ',
@@ -406,7 +406,7 @@ const es: Dictionary = {
     rightsTemplate: '{year} Miriam Tellez · Todos los derechos reservados',
     madeWith: 'Hecho con luz de atardecer',
   },
-  whatsappAria: 'Chatea con Miriam por WhatsApp',
+
   faq: {
     eyebrow: 'Preguntas frecuentes',
     titlePre: 'Todo lo que quieres saber ',

@@ -14,7 +14,6 @@ import Testimonials from './components/Testimonials';
 import Faq from './components/Faq';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import WhatsAppButton from './components/WhatsAppButton';
 import AdminPage from './components/Admin/AdminPage';
 
 interface Content {
@@ -97,7 +96,6 @@ function Site() {
         )}
       </main>
       {!isBookingPage && <Footer />}
-      <WhatsAppButton />
       {loadError && (
         <div className="load-error" role="alert">
           {t.loadError}

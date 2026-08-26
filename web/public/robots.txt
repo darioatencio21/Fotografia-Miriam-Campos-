@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /api/
 
-Sitemap: https://miriamtellez.photo/sitemap.xml
+Sitemap: https://miriamtellezphotography.com/sitemap.xml

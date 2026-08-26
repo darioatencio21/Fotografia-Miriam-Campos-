@@ -5,8 +5,8 @@ const SMTP_HOST = process.env.SMTP_HOST ?? '';
 const SMTP_PORT = Number(process.env.SMTP_PORT ?? 1025);
 const SMTP_USER = process.env.SMTP_USER ?? '';
 const SMTP_PASS = process.env.SMTP_PASS ?? '';
-const MAIL_FROM = process.env.MAIL_FROM ?? 'Miriam Tellez <hola@miriamtellez.photo>';
-const PHOTOGRAPHER_EMAIL = process.env.PHOTOGRAPHER_EMAIL ?? 'hola@miriamtellez.photo';
+const MAIL_FROM = process.env.MAIL_FROM ?? 'Miriam Tellez <miriamtellezphotography@gmail.com>';
+const PHOTOGRAPHER_EMAIL = process.env.PHOTOGRAPHER_EMAIL ?? 'miriamtellezphotography@gmail.com';
 
 export type MailLang = 'en' | 'es';
 

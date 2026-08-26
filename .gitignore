@@ -16,3 +16,9 @@ logo miriam tellez.png
 
 # Respaldos de base de datos (generados en el VPS)
 backups/
+
+# Notas personales / credenciales
+NOTAS.md
+
+# Archivos sensibles locales
+PELIGRO Archivos delicados/

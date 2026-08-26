@@ -29,7 +29,7 @@ services:
       SMTP_USER: resend
       SMTP_PASS: "${SMTP_PASS:-}"
       MAIL_FROM: "Miriam Tellez <onboarding@resend.dev>"
-      PHOTOGRAPHER_EMAIL: "${PHOTOGRAPHER_EMAIL:-hola@miriamtellez.photo}"
+      PHOTOGRAPHER_EMAIL: "${PHOTOGRAPHER_EMAIL:-miriamtellezphotography@gmail.com}"
       ADMIN_KEY: "${ADMIN_KEY:?Falta ADMIN_KEY en .env}"
       UPLOAD_DIR: /app/uploads
     volumes:

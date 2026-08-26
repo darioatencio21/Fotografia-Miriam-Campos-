@@ -123,7 +123,7 @@ export default function Contact({ services }: { services: Service[] }) {
             <ul className="contact-info">
               <li>
                 <span className="contact-info-label">{t.contact.email}</span>
-                <a href="mailto:hola@miriamtellez.photo">hola@miriamtellez.photo</a>
+                <a href="mailto:miriamtellezphotography@gmail.com">miriamtellezphotography@gmail.com</a>
               </li>
               <li>
                 <span className="contact-info-label">{t.contact.phone}</span>
