@@ -1,11 +1,39 @@
+import { useEffect, useState } from 'react';
 import { useLang } from '../i18n';
 
+const SLIDES = [
+  { src: '/images/gallery/maternidad-01.jpg', alt_en: 'Maternity session at golden hour', alt_es: 'Sesión de maternidad en hora dorada' },
+  { src: '/images/gallery/familias-01.jpg', alt_en: 'Family photography outdoors', alt_es: 'Fotografía familiar al aire libre' },
+  { src: '/images/gallery/bodas-01.jpg', alt_en: 'Wedding photography', alt_es: 'Fotografía de bodas' },
+  { src: '/images/gallery/quinceanera-01.jpg', alt_en: 'Quinceañera portrait session', alt_es: 'Sesión de quinceañera' },
+  { src: '/images/gallery/graduaciones-01.jpg', alt_en: 'Graduation photos', alt_es: 'Fotos de graduación' },
+  { src: '/images/gallery/engagement-01.jpg', alt_en: 'Engagement session', alt_es: 'Sesión de compromiso' },
+];
+
+const INTERVAL = 5000;
+
 export default function Hero() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActive((prev) => (prev + 1) % SLIDES.length);
+    }, INTERVAL);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <section className="hero" id="inicio">
-      <img className="hero-bg" src="/images/hero.svg" alt="" aria-hidden="true" />
+      {SLIDES.map((slide, i) => (
+        <img
+          key={slide.src}
+          className={`hero-slide${i === active ? ' active' : ''}`}
+          src={slide.src}
+          alt={lang === 'en' ? slide.alt_en : slide.alt_es}
+          aria-hidden="true"
+        />
+      ))}
       <div className="hero-glow" aria-hidden="true" />
       <div className="container hero-content">
         <p className="eyebrow hero-eyebrow">{t.hero.eyebrow}</p>
