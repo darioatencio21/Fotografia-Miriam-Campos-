@@ -3086,6 +3086,298 @@ button {
   opacity: 1;
 }
 
+/* ============ Panel: responsivo móvil ============ */
+
+@media (hover: none), (pointer: coarse) {
+  .photo-del {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-view-tabs .chip {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    padding: 10px 12px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-container {
+    padding-block: 22px 72px;
+  }
+
+  /* ---- Header: dos líneas equilibradas ---- */
+  .admin-header {
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    padding-block: 12px;
+  }
+
+  .admin-header-actions {
+    flex: 1 1 100%;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  .admin-header-site {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .admin-header-logout {
+    border: 1px solid var(--line-light) !important;
+    border-radius: 999px !important;
+    padding: 7px 16px !important;
+    background: rgba(251, 246, 237, 0.06) !important;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .admin-header-logout:hover {
+    background: rgba(217, 150, 47, 0.16) !important;
+    color: var(--honey) !important;
+  }
+
+  /* ---- Resumen mensual: tarjetas tipo tiles ---- */
+  .admin-summary {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .summary-month {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .summary-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    width: 100%;
+  }
+
+  .summary-card {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 8px;
+    border-radius: 14px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .summary-card strong {
+    font-size: 1.5rem;
+  }
+
+  .summary-card span {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ---- Calendario: compacto y tocable ---- */
+  .admin-calendar {
+    padding: 14px;
+  }
+
+  .cal-head {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cal-head strong {
+    min-width: 0;
+    flex: 1 1 auto;
+    order: 0;
+    font-size: 1.05rem;
+  }
+
+  .cal-head .cal-today {
+    margin-left: 0;
+    order: 3;
+  }
+
+  .cal-grid {
+    gap: 4px;
+  }
+
+  .cal-weekday {
+    font-size: 0.66rem;
+  }
+
+  .cal-day {
+    font-size: 0.82rem;
+    border-radius: 8px;
+  }
+
+  .cal-dots {
+    font-size: 0.46rem;
+  }
+
+  .cal-legend {
+    line-height: 1.6;
+  }
+
+  .cal-day-panel-info a {
+    overflow-wrap: anywhere;
+  }
+
+  /* ---- Filtros y botones de la lista ---- */
+  .admin-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .admin-tabs .chip {
+    width: 100%;
+    text-align: center;
+    padding: 11px 10px;
+  }
+
+  .admin-tabs .admin-type-select,
+  .admin-tabs .admin-refresh,
+  .admin-tabs .btn-csv {
+    grid-column: 1 / -1;
+  }
+
+  .admin-tabs .admin-refresh {
+    margin-left: 0;
+  }
+
+  .admin-type-select {
+    width: 100%;
+  }
+
+  .admin-type-select select {
+    width: 100%;
+    padding-block: 11px;
+  }
+
+  /* ---- Tarjetas de solicitudes ---- */
+  .admin-card {
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+
+  .admin-card-top {
+    gap: 8px;
+  }
+
+  .admin-card-top time {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .admin-card-main h2 {
+    font-size: 1.3rem;
+  }
+
+  .admin-card-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .admin-card-footer .btn {
+    width: 100%;
+  }
+
+  .admin-reject-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .admin-reject-actions .btn {
+    justify-content: center;
+  }
+
+  .admin-decision-note {
+    font-size: 0.86rem;
+  }
+
+  /* ---- Reseñas ---- */
+  .review-foot {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .review-actions {
+    display: flex;
+  }
+
+  .review-actions .btn {
+    flex: 1 1 0;
+    justify-content: center;
+  }
+
+  /* ---- Gestor de fotos ---- */
+  .photo-grid-admin {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+
+  .photo-cell figcaption {
+    padding: 7px 8px;
+    font-size: 0.68rem;
+  }
+
+  .admin-section-title {
+    font-size: 1.2rem;
+  }
+
+  /* ---- Login ---- */
+  .admin-login-wrap {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .admin-view-tabs {
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+
+  .admin-view-tabs .chip {
+    padding-inline: 8px;
+    font-size: 0.7rem;
+  }
+
+  .admin-header-site-label {
+    display: none;
+  }
+
+  .admin-header-site {
+    font-size: 1.05rem;
+    padding: 4px 8px;
+  }
+
+  .cal-dots {
+    display: none;
+  }
+
+  .summary-card span {
+    font-size: 0.56rem;
+    letter-spacing: 0.08em;
+  }
+
+  .summary-card strong {
+    font-size: 1.35rem;
+  }
+}
+
 /* ============ Lightbox galeria ============ */
 
 .masonry-item {

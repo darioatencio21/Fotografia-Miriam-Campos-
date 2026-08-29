@@ -225,8 +225,13 @@ export default function AdminPage() {
         <p className="admin-brand">{a.brand}</p>
         <div className="admin-header-actions">
           <LangToggle />
-          <a href="/">{a.viewSite}</a>
-          <button type="button" onClick={logout}>
+          <a className="admin-header-site" href="/">
+            <span className="admin-header-site-icon" aria-hidden="true">
+              ↗
+            </span>
+            <span className="admin-header-site-label">{a.viewSite}</span>
+          </a>
+          <button className="admin-header-logout" type="button" onClick={logout}>
             {a.logout}
           </button>
         </div>
