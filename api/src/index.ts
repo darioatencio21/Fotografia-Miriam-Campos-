@@ -431,10 +431,12 @@ app.get('/api/admin/inquiries.xlsx', async (req, res, next) => {
   }
   try {
     const { rows } = await pool.query(
-      `SELECT id, created_at, name, email, phone, session_type,
-              event_date::text AS event_date, status, message, admin_note, lang
-       FROM inquiries
-       ORDER BY created_at DESC`
+      `SELECT i.id, i.created_at, i.name, i.email, i.phone, i.session_type,
+              i.event_date::text AS event_date, i.status, i.message, i.admin_note,
+              i.lang, i.reminder_48h_sent, i.responded_at,
+              (SELECT COUNT(*) FROM custom_emails ce WHERE ce.inquiry_id = i.id)::int AS custom_count
+       FROM inquiries i
+       ORDER BY i.created_at DESC`
     );
 
     const wb = new ExcelJS.Workbook();
@@ -453,6 +455,8 @@ app.get('/api/admin/inquiries.xlsx', async (req, res, next) => {
       { header: 'Mensaje', width: 46 },
       { header: 'Nota admin', width: 38 },
       { header: 'Idioma', width: 9 },
+      { header: 'Recordatorio 48h', width: 16 },
+      { header: 'Mensajes enviados', width: 17 },
     ];
 
     const head = ws.getRow(1);
@@ -481,6 +485,8 @@ app.get('/api/admin/inquiries.xlsx', async (req, res, next) => {
         r.message,
         r.admin_note ?? '',
         r.lang === 'en' ? 'EN' : 'ES',
+        r.reminder_48h_sent ? 'Enviado' : 'No',
+        r.custom_count ?? 0,
       ]);
       row.alignment = { vertical: 'top' };
 
@@ -496,13 +502,17 @@ app.get('/api/admin/inquiries.xlsx', async (req, res, next) => {
       statusCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: st.bg } };
       statusCell.alignment = { vertical: 'top', horizontal: 'center' };
 
+      for (const col of [11, 12]) {
+        row.getCell(col).alignment = { vertical: 'top', horizontal: 'center' };
+      }
+
       row.eachCell((cell) => {
         cell.border = BORDER_COLOR;
       });
     }
 
     ws.views = [{ state: 'frozen', ySplit: 1 }];
-    ws.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: 10 } };
+    ws.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: 12 } };
 
     const stamp = new Date().toISOString().slice(0, 10);
     res.setHeader(
