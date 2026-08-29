@@ -5,7 +5,13 @@ import path from 'node:path';
 import multer from 'multer';
 import ExcelJS from 'exceljs';
 import { pool } from './db.js';
-import { sendDecisionEmail, sendInquiryEmails, sendNewReviewEmail } from './mailer.js';
+import {
+  sendCustomEmail,
+  sendDecisionEmail,
+  sendInquiryEmails,
+  sendNewReviewEmail,
+  sendReminderEmail,
+} from './mailer.js';
 import type { MailLang } from './mailer.js';
 
 const app = express();
@@ -20,6 +26,8 @@ app.use(express.json());
 const RATE_LIMIT_MAX = 5;
 const RATE_WINDOW_MS = 60 * 60 * 1000;
 const hits = new Map<string, number[]>();
+
+const RESUBMIT_LOCK_MS = 10 * 60 * 1000;
 
 function rateLimited(key: string): boolean {
   const now = Date.now();
@@ -204,6 +212,26 @@ app.post('/api/inquiries', async (req, res, next) => {
       return;
     }
 
+    // Anti-reescritura: impedir que el mismo correo vuelva a enviar dentro de 10 min.
+    const lastRes = await pool.query(
+      `SELECT created_at FROM inquiries
+       WHERE email = $1
+       ORDER BY created_at DESC
+       LIMIT 1`,
+      [email]
+    );
+    if (lastRes.rowCount && lastRes.rowCount > 0) {
+      const lastAt = new Date(lastRes.rows[0].created_at).getTime();
+      const remaining = RESUBMIT_LOCK_MS - (Date.now() - lastAt);
+      if (remaining > 0) {
+        res.status(429).json({
+          errors: ['Ya enviaste una solicitud hace poco. Espera unos minutos antes de enviar otra.'],
+          retryAfter: Math.ceil(remaining / 1000),
+        });
+        return;
+      }
+    }
+
     const { rows } = await pool.query(
       `INSERT INTO inquiries (name, email, phone, session_type, event_date, message, lang)
        VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -325,6 +353,57 @@ app.patch('/api/admin/inquiries/:id', async (req, res, next) => {
     });
 
     res.json(row);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/* ---------- Mensaje personalizado (info de pago, etc.) ---------- */
+
+app.post('/api/admin/inquiries/:id/custom-mail', async (req, res, next) => {
+  if (!isAdmin(req)) {
+    res.status(401).json({ error: 'No autorizado' });
+    return;
+  }
+  try {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id <= 0) {
+      res.status(400).json({ error: 'Id inválido.' });
+      return;
+    }
+    const body = (req.body ?? {}) as Record<string, unknown>;
+    const message = String(body.message ?? '').trim();
+    if (message.length < 3 || message.length > 1000) {
+      res.status(400).json({ error: 'El mensaje debe tener entre 3 y 1000 caracteres.' });
+      return;
+    }
+
+    const { rows } = await pool.query(
+      `SELECT id, name, email, session_type, lang, event_date::text AS event_date
+       FROM inquiries WHERE id = $1`,
+      [id]
+    );
+    if (rows.length === 0) {
+      res.status(404).json({ error: 'Solicitud no encontrada.' });
+      return;
+    }
+    const row = rows[0];
+
+    await pool.query(
+      'INSERT INTO custom_emails (inquiry_id, message) VALUES ($1, $2)',
+      [row.id, message]
+    );
+
+    sendCustomEmail({
+      name: row.name,
+      email: row.email,
+      sessionType: row.session_type,
+      // Correos personalizados siempre en inglés.
+      lang: 'en',
+      message,
+    });
+
+    res.status(201).json({ ok: true });
   } catch (err) {
     next(err);
   }
@@ -644,6 +723,45 @@ app.use((err: unknown, _req: express.Request, res: express.Response, _next: expr
 const server = app.listen(port, () => {
   console.log(`API escuchando en http://localhost:${port}`);
 });
+
+/* ---------- Recordatorio automático 48h antes de la sesión ---------- */
+
+const REMINDER_WINDOW_MS = 2 * 60 * 60 * 1000; // margen de 2h para no perder solicitudes
+const REMINDER_INTERVAL_MS = 30 * 60 * 1000;
+
+async function runReminders(): Promise<void> {
+  try {
+    const now = new Date();
+    const upper = new Date(now.getTime() + 48 * 60 * 60 * 1000 + REMINDER_WINDOW_MS);
+    const { rows } = await pool.query(
+      `SELECT id, name, email, session_type, event_date::text AS event_date, lang
+       FROM inquiries
+       WHERE status = 'accepted'
+         AND reminder_48h_sent = false
+         AND event_date IS NOT NULL
+         AND event_date::timestamp >= $1
+         AND event_date::timestamp <= $2
+       ORDER BY event_date`,
+      [now, upper]
+    );
+    for (const row of rows) {
+      sendReminderEmail({
+        name: row.name,
+        email: row.email,
+        sessionType: row.session_type,
+        eventDate: row.event_date,
+        // Recordatorios siempre en inglés.
+        lang: 'en',
+      });
+      await pool.query('UPDATE inquiries SET reminder_48h_sent = true WHERE id = $1', [row.id]);
+    }
+  } catch (err) {
+    console.error('[reminder] Error ejecutando recordatorios:', err instanceof Error ? err.message : err);
+  }
+}
+
+void runReminders();
+setInterval(() => void runReminders(), REMINDER_INTERVAL_MS);
 
 for (const signal of ['SIGINT', 'SIGTERM'] as const) {
   process.on(signal, () => {

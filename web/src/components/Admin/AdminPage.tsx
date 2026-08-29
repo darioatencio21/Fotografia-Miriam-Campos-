@@ -13,6 +13,7 @@ import {
   adminDeleteTestimonial,
   adminFetchInquiries,
   adminFetchTestimonials,
+  adminSendCustomMail,
   adminSetTestimonialApproved,
   adminUploadPhoto,
   clearAdminKey,
@@ -291,6 +292,9 @@ function InquiriesView({ loading, reload }: { loading: boolean; reload: () => Pr
   const [error, setError] = useState('');
   const [monthCursor, setMonthCursor] = useState(() => new Date());
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  const [customPanelId, setCustomPanelId] = useState<number | null>(null);
+  const [customMessage, setCustomMessage] = useState('');
+  const [customBusy, setCustomBusy] = useState(false);
 
   useEffect(() => {
     adminFetchInquiries()
@@ -336,6 +340,27 @@ function InquiriesView({ loading, reload }: { loading: boolean; reload: () => Pr
   function submitReject(e: FormEvent<HTMLFormElement>, id: number) {
     e.preventDefault();
     void decide(id, 'declined', note.trim());
+  }
+
+  async function sendCustom(id: number, message: string) {
+    if (!message.trim()) return;
+    setCustomBusy(true);
+    setError('');
+    try {
+      await adminSendCustomMail(id, message.trim());
+      setFlash(a.customSentFlash);
+      setCustomPanelId(null);
+      setCustomMessage('');
+    } catch (err) {
+      if (err instanceof AdminAuthError) {
+        clearAdminKey();
+        window.location.href = '/admin';
+        return;
+      }
+      setError(err instanceof Error ? err.message : a.errCustomSend);
+    } finally {
+      setCustomBusy(false);
+    }
   }
 
   /* ---- Calendario ---- */
@@ -694,6 +719,47 @@ function InquiriesView({ loading, reload }: { loading: boolean; reload: () => Pr
                 </button>
               </div>
             </form>
+          )}
+
+          {customPanelId === inq.id ? (
+            <form className="admin-custom-panel" onSubmit={(e) => { e.preventDefault(); void sendCustom(inq.id, customMessage); }}>
+              <label>
+                {a.customLabel}
+                <textarea
+                  rows={5}
+                  maxLength={1000}
+                  value={customMessage}
+                  onChange={(e) => setCustomMessage(e.target.value)}
+                  placeholder={a.customPlaceholder}
+                  autoFocus
+                />
+              </label>
+              <span className="field-counter">{customMessage.length}/1000</span>
+              <div className="admin-reject-actions">
+                <button type="submit" className="btn btn-accept" disabled={customBusy || !customMessage.trim()}>
+                  {customBusy ? a.sendingShort : a.customSendBtn}
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  onClick={() => { setCustomPanelId(null); setCustomMessage(''); }}
+                >
+                  {a.cancel}
+                </button>
+              </div>
+            </form>
+          ) : (
+            inq.status === 'accepted' && (
+              <div className="admin-card-custom">
+                <button
+                  type="button"
+                  className="btn btn-outline btn-sm"
+                  onClick={() => { setCustomPanelId(inq.id); setCustomMessage(''); }}
+                >
+                  {a.customOpenBtn}
+                </button>
+              </div>
+            )
           )}
         </article>
       ))}

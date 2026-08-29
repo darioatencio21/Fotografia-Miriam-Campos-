@@ -32,20 +32,40 @@ export interface InquiryPayload {
   website?: string;
 }
 
-export async function sendInquiry(payload: InquiryPayload): Promise<void> {
+export interface SendInquiryResult {
+  ok: boolean;
+  /** Segundos restantes si el mismo correo ya envió hace poco (devolverá false). */
+  blockedUntil?: number;
+  error?: string;
+}
+
+export async function sendInquiry(payload: InquiryPayload): Promise<SendInquiryResult> {
   const res = await fetch('/api/inquiries', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   });
   const data: unknown = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    const errors =
-      typeof data === 'object' && data !== null && Array.isArray((data as { errors?: string[] }).errors)
-        ? (data as { errors: string[] }).errors
-        : null;
-    throw new Error(errors ? errors.join(' ') : 'No pudimos enviar tu mensaje. Intenta de nuevo.');
+  if (res.ok) return { ok: true };
+
+  const obj = (data ?? {}) as {
+    errors?: string[];
+    retryAfter?: number;
+  };
+  const errors = Array.isArray(obj.errors) ? obj.errors : null;
+
+  if (res.status === 429 && obj.retryAfter) {
+    return {
+      ok: false,
+      blockedUntil: obj.retryAfter,
+      error: errors ? errors.join(' ') : 'You have already sent a request recently. Please wait a few minutes.',
+    };
   }
+
+  return {
+    ok: false,
+    error: errors ? errors.join(' ') : 'We could not send your message. Please try again.',
+  };
 }
 
 export async function fetchAvailability(): Promise<string[]> {
@@ -111,6 +131,13 @@ export function adminDecideInquiry(
   return adminRequest(`/api/admin/inquiries/${id}`, {
     method: 'PATCH',
     body: JSON.stringify({ status, note }),
+  });
+}
+
+export function adminSendCustomMail(id: number, message: string): Promise<unknown> {
+  return adminRequest(`/api/admin/inquiries/${id}/custom-mail`, {
+    method: 'POST',
+    body: JSON.stringify({ message }),
   });
 }
 

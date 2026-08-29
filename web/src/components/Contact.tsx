@@ -38,6 +38,7 @@ export default function Contact({ services }: { services: Service[] }) {
   const [errors, setErrors] = useState<string[]>([]);
   const [serverError, setServerError] = useState(false);
   const [bookedDates, setBookedDates] = useState<string[]>([]);
+  const [waitSeconds, setWaitSeconds] = useState<number | null>(null);
 
   const serviceTitle = (slug: string) => {
     const s = services.find((sv) => sv.slug === slug);
@@ -56,6 +57,23 @@ export default function Contact({ services }: { services: Service[] }) {
       active = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (waitSeconds === null || waitSeconds <= 0) {
+      setWaitSeconds(null);
+      return;
+    }
+    const timer = setInterval(() => {
+      setWaitSeconds((cur) => (cur === null ? null : cur - 1));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [waitSeconds === null ? -1 : Math.ceil(waitSeconds / 60)]);
+
+  const formatCountdown = (secs: number) => {
+    const m = String(Math.floor(secs / 60)).padStart(2, '0');
+    const s = String(secs % 60).padStart(2, '0');
+    return `${m}:${s}`;
+  };
 
   const update =
     (field: keyof typeof form) =>
@@ -89,7 +107,7 @@ export default function Contact({ services }: { services: Service[] }) {
 
     setStatus('sending');
     try {
-      await sendInquiry({
+      const result = await sendInquiry({
         name: form.name.trim(),
         email: form.email.trim(),
         phone: form.phone.trim(),
@@ -102,6 +120,16 @@ export default function Contact({ services }: { services: Service[] }) {
         lang,
         website: form.website,
       });
+      if (!result.ok) {
+        if (result.blockedUntil) {
+          setWaitSeconds(result.blockedUntil);
+          setErrors([result.error ?? t.contact.rateLimited]);
+        } else {
+          setServerError(true);
+        }
+        setStatus('idle');
+        return;
+      }
       setStatus('success');
       setForm({ ...initialForm, termsAccepted: false });
     } catch {
@@ -288,10 +316,17 @@ export default function Contact({ services }: { services: Service[] }) {
                 <span>{t.contact.termsCheckbox}</span>
               </label>
 
+              {waitSeconds !== null && waitSeconds > 0 && (
+                <p className="form-error form-rate" role="status">
+                  {t.contact.rateLimitedMessage}{' '}
+                  <strong>{formatCountdown(waitSeconds)}</strong>
+                </p>
+              )}
+
               <button
                 className="btn btn-primary btn-block"
                 type="submit"
-                disabled={status === 'sending'}
+                disabled={status === 'sending' || (waitSeconds !== null && waitSeconds > 0)}
               >
                 {status === 'sending' ? t.contact.sending : t.contact.submit}
               </button>

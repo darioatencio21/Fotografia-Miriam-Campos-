@@ -128,6 +128,8 @@ const en = {
       'You may reschedule once at no cost with at least 48 hours\' notice.',
     termsCheckbox: 'I have read and accept the terms and conditions *',
     errTerms: 'You must accept the terms and conditions to continue.',
+    rateLimited: 'You have already sent a request recently.',
+    rateLimitedMessage: 'You can send another request in',
     termsLink: 'Read full terms and conditions',
   },
   footer: {
@@ -321,6 +323,13 @@ const en = {
     errCats: 'Categories could not be loaded.',
     errUpload: 'The photo could not be uploaded.',
     errDeletePhoto: 'Could not delete.',
+    customSentFlash: 'Your message was sent to the client.',
+    errCustomSend: 'The message could not be sent.',
+    customOpenBtn: '✉ Send custom message (payment info…)',
+    customLabel: 'Message to the client (sent by email):',
+    customPlaceholder:
+      'E.g.: Hello! Here are the payment details for your session deposit. You can pay via…',
+    customSendBtn: 'Send message',
   },
 };
 
@@ -451,6 +460,8 @@ const es: Dictionary = {
       'Puedes reprogramar una vez sin costo con al menos 48 horas de anticipación.',
     termsCheckbox: 'He leído y acepto los términos y condiciones *',
     errTerms: 'Debes aceptar los términos y condiciones para continuar.',
+    rateLimited: 'Ya enviaste una solicitud hace poco.',
+    rateLimitedMessage: 'Podrás enviar otra solicitud en',
     termsLink: 'Leer términos y condiciones completos',
   },
   footer: {
@@ -644,6 +655,13 @@ const es: Dictionary = {
     errCats: 'No se pudieron cargar las categorías.',
     errUpload: 'No se pudo subir la foto.',
     errDeletePhoto: 'No se pudo eliminar.',
+    customSentFlash: 'Tu mensaje fue enviado al cliente.',
+    errCustomSend: 'No se pudo enviar el mensaje.',
+    customOpenBtn: '✉ Enviar mensaje personalizado (info de pago…)',
+    customLabel: 'Mensaje para el cliente (se envía por correo):',
+    customPlaceholder:
+      'Ej.: ¡Hola! Aquí van los detalles de pago para tu depósito. Puedes pagar vía…',
+    customSendBtn: 'Enviar mensaje',
   },
 };
 

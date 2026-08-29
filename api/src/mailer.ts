@@ -354,3 +354,121 @@ async function deliverNewReview(d: NewReviewMailData): Promise<void> {
 export function sendNewReviewEmail(d: NewReviewMailData): void {
   void deliverNewReview(d);
 }
+
+export interface CustomMailData {
+  name: string;
+  email: string;
+  sessionType: string;
+  lang: MailLang;
+  message: string;
+}
+
+async function deliverCustomEmail(d: CustomMailData): Promise<void> {
+  const reason = smtpUnavailableReason();
+  if (reason) {
+    console.log(`[mail] Correo personalizado omitido: ${reason}.`);
+    return;
+  }
+  const transport = getTransport()!;
+
+  const es = d.lang === 'es';
+  const firstName = esc(d.name.split(' ')[0]);
+
+  const paragraphs = d.message
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map(
+      (p) =>
+        `<p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:#2e2115;">${esc(p)
+          .replace(/\n/g, '<br>')}</p>`
+    )
+    .join('');
+
+  const inner = `
+<tr><td style="padding:18px 34px 0;">
+  <h1 style="margin:0;font-size:24px;font-weight:normal;color:#2e2115;">${es ? 'Un mensaje para ti' : 'A message for you'}</h1>
+  <p style="margin:8px 0 0;font-size:14px;color:#6e5b47;">
+    ${es ? 'Sobre tu sesión de' : 'Regarding your'} <strong>${esc(d.sessionType)}</strong> ${es ? 'contigo' : 'session'}.
+  </p>
+</td></tr>
+<tr><td style="padding:8px 34px 6px;">${paragraphs}</td></tr>
+<tr><td style="padding:16px 34px 0;">
+  <p style="margin:0;font-size:14px;color:#6e5b47;">${es ? 'Cualquier duda, respóndeme este correo. ¡Un abrazo!' : 'Any questions, just reply to this email. Warmly!'}</p>
+</td></tr>`;
+
+  try {
+    await transport.sendMail({
+      from: MAIL_FROM,
+      to: d.email,
+      replyTo: PHOTOGRAPHER_EMAIL,
+      subject: es
+        ? `Información sobre tu sesión · Miriam Tellez Fotografía`
+        : `Your session details · Miriam Tellez Photography`,
+      html: layout(inner),
+      text: d.message,
+    });
+    console.log(`[mail] Mensaje personalizado enviado a ${d.email}`);
+  } catch (err) {
+    console.error('[mail] Error enviando mensaje personalizado:', err instanceof Error ? err.message : err);
+  }
+}
+
+export function sendCustomEmail(d: CustomMailData): void {
+  void deliverCustomEmail(d);
+}
+
+export interface ReminderMailData {
+  name: string;
+  email: string;
+  sessionType: string;
+  eventDate: string;
+  lang: MailLang;
+}
+
+async function deliverReminder(d: ReminderMailData): Promise<void> {
+  const reason = smtpUnavailableReason();
+  if (reason) {
+    console.log(`[mail] Recordatorio 48h omitido: ${reason}.`);
+    return;
+  }
+  const transport = getTransport()!;
+
+  const es = d.lang === 'es';
+  const firstName = esc(d.name.split(' ')[0]);
+  const body = formatDate(d.eventDate, d.lang);
+
+  const inner = `
+<tr><td style="padding:18px 34px 0;">
+  <h1 style="margin:0;font-size:24px;font-weight:normal;color:#2e2115;">${es ? 'Tu sesión está por llegar' : 'Your session is almost here'}</h1>
+  <p style="margin:14px 0 0;font-size:15px;line-height:1.75;color:#2e2115;">
+    ${es ? `Hola ${firstName}, tu sesión de <strong>${esc(d.sessionType)}</strong> es en <strong>2 días</strong> (${body}). ¡Qué emoción!` : `Hi ${firstName}, your <strong>${esc(d.sessionType)}</strong> session is in <strong>2 days</strong> (${body}). So exciting!`}
+  </p>
+  <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:#2e2115;">
+    ${es ? 'Revisa tu correo por si tienes algún mensaje mío con los detalles (ubicación exacta y hora de encuentro). Si tienes dudas, respóndeme este correo.' : 'Check your inbox for any message from me with the details (exact location and meeting time). If you have questions, reply to this email.'}
+  </p>
+</td></tr>
+<tr><td style="padding:16px 34px 0;"><p style="margin:0;font-size:14px;color:#6e5b47;">${es ? '¡Nos vemos pronto!' : 'See you soon!'}</p></td></tr>`;
+
+  try {
+    await transport.sendMail({
+      from: MAIL_FROM,
+      to: d.email,
+      replyTo: PHOTOGRAPHER_EMAIL,
+      subject: es
+        ? `Recordatorio: tu sesión en 2 días · Miriam Tellez Fotografía`
+        : `Reminder: your session in 2 days · Miriam Tellez Photography`,
+      html: layout(inner),
+      text: es
+        ? `Hola ${d.name}: tu sesión de ${d.sessionType} es en 2 días (${body}). — Miriam Tellez`
+        : `Hi ${d.name}: your ${d.sessionType} session is in 2 days (${body}). — Miriam Tellez`,
+    });
+    console.log(`[mail] Recordatorio 48h enviado a ${d.email}`);
+  } catch (err) {
+    console.error('[mail] Error enviando recordatorio:', err instanceof Error ? err.message : err);
+  }
+}
+
+export function sendReminderEmail(d: ReminderMailData): void {
+  void deliverReminder(d);
+}

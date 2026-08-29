@@ -72,7 +72,15 @@ CREATE TABLE inquiries (
   status text NOT NULL DEFAULT 'pending',
   admin_note text,
   responded_at timestamptz,
-  created_at timestamptz NOT NULL DEFAULT now()
+  created_at timestamptz NOT NULL DEFAULT now(),
+  reminder_48h_sent boolean NOT NULL DEFAULT false
+);
+
+CREATE TABLE custom_emails (
+  id serial PRIMARY KEY,
+  inquiry_id integer NOT NULL REFERENCES inquiries(id) ON DELETE CASCADE,
+  message text NOT NULL,
+  sent_at timestamptz NOT NULL DEFAULT now()
 );
 
 INSERT INTO services (slug, title, title_en, tagline, tagline_en, description, description_en, image_url, duration, duration_en, location_note, location_note_en, deliverables, price_from, sort_order) VALUES
