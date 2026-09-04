@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import type { GalleryCategory, Photo, Service, Stat, Testimonial } from './types';
 import { fetchCategories, fetchPhotos, fetchServices, fetchStats, fetchTestimonials } from './lib/api';
 import { useLang } from './i18n';
@@ -15,7 +15,8 @@ import Faq from './components/Faq';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Terms from './components/Terms';
-import AdminPage from './components/Admin/AdminPage';
+
+const AdminPage = lazy(() => import('./components/Admin/AdminPage'));
 
 interface Content {
   services: Service[];
@@ -35,7 +36,13 @@ const EMPTY: Content = {
 
 export default function App() {
   const isAdminRoute = window.location.pathname.replace(/\/+$/, '') === '/admin';
-  return isAdminRoute ? <AdminPage /> : <Site />;
+  return isAdminRoute ? (
+    <Suspense fallback={<div className="load-error" role="status">…</div>}>
+      <AdminPage />
+    </Suspense>
+  ) : (
+    <Site />
+  );
 }
 
 function Site() {

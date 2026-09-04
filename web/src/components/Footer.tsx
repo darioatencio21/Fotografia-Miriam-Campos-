@@ -79,7 +79,7 @@ export default function Footer() {
       <div className="container footer-main">
         <div className="footer-brandline">
           <a className="brand brand-logo-footer" href="/" aria-label="Miriam Tellez">
-            <img src="/images/logo.png" alt="" width={480} height={480} loading="lazy" />
+            <img src="/images/logo.webp" alt="" width={480} height={480} loading="lazy" />
           </a>
           <nav className="footer-nav-inline" aria-label={t.footer.navigate}>
             <a href="#sobre-mi">{t.nav.about}</a>

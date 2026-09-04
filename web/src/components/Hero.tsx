@@ -1,22 +1,37 @@
 import { useEffect, useState } from 'react';
 import { useLang } from '../i18n';
 
+interface SlideImage {
+  src: string;
+  srcset: string;
+  alt_en: string;
+  alt_es: string;
+}
+
+const slide = (base: string, alt_en: string, alt_es: string): SlideImage => ({
+  src: `/images/hero/${base}.webp`,
+  srcset: `/images/hero/${base}-640.webp 640w, /images/hero/${base}.webp 854w`,
+  alt_en,
+  alt_es,
+});
+
 const SLIDES = [
   {
-    left: { src: '/images/hero/hero-maternidad.jpg', alt_en: 'Maternity session at golden hour', alt_es: 'Sesión de maternidad en hora dorada' },
-    right: { src: '/images/hero/hero-familias.jpg', alt_en: 'Family photography outdoors', alt_es: 'Fotografía familiar al aire libre' },
+    left: slide('hero-maternidad', 'Maternity session at golden hour', 'Sesión de maternidad en hora dorada'),
+    right: slide('hero-familias', 'Family photography outdoors', 'Fotografía familiar al aire libre'),
   },
   {
-    left: { src: '/images/hero/hero-bodas.jpg', alt_en: 'Wedding photography', alt_es: 'Fotografía de bodas' },
-    right: { src: '/images/hero/hero-quinceanera.jpg', alt_en: 'Quinceañera portrait session', alt_es: 'Sesión de quinceañera' },
+    left: slide('hero-bodas', 'Wedding photography', 'Fotografía de bodas'),
+    right: slide('hero-quinceanera', 'Quinceañera portrait session', 'Sesión de quinceañera'),
   },
   {
-    left: { src: '/images/hero/hero-graduaciones.jpg', alt_en: 'Graduation photos', alt_es: 'Fotos de graduación' },
-    right: { src: '/images/hero/hero-engagement.jpg', alt_en: 'Engagement session', alt_es: 'Sesión de compromiso' },
+    left: slide('hero-graduaciones', 'Graduation photos', 'Fotos de graduación'),
+    right: slide('hero-engagement', 'Engagement session', 'Sesión de compromiso'),
   },
 ];
 
 const INTERVAL = 5000;
+const SIZES = '(min-width: 768px) 50vw, 100vw';
 
 export default function Hero() {
   const { lang, t } = useLang();
@@ -36,14 +51,20 @@ export default function Hero() {
           <img
             className="hero-slide-left"
             src={slide.left.src}
+            srcSet={slide.left.srcset}
+            sizes={SIZES}
             alt={lang === 'en' ? slide.left.alt_en : slide.left.alt_es}
             aria-hidden="true"
+            fetchPriority={i === 0 ? 'high' : 'auto'}
           />
           <img
             className="hero-slide-right"
             src={slide.right.src}
+            srcSet={slide.right.srcset}
+            sizes={SIZES}
             alt={lang === 'en' ? slide.right.alt_en : slide.right.alt_es}
             aria-hidden="true"
+            fetchPriority={i === 0 ? 'high' : 'auto'}
           />
         </div>
       ))}

@@ -37,7 +37,7 @@ export default function Header() {
       <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="container header-inner">
           <a className="brand" href="/" onClick={close} aria-label="Miriam Tellez">
-            <img src="/images/logo.png" alt="Miriam Tellez" width={480} height={480} />
+            <img src="/images/logo.webp" alt="Miriam Tellez" width={480} height={480} fetchPriority="high" />
           </a>
           <nav className="header-nav" aria-label={t.mainNavAria}>
             {LINKS.map((l) => (
