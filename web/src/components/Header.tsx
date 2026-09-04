@@ -2,21 +2,28 @@ import { useEffect, useState } from 'react';
 import { useLang } from '../i18n';
 import LanguageSwitcher from './LanguageSwitcher';
 
-const LINKS = [
-  { href: '#sobre-mi', key: 'about' as const },
-  { href: '#servicios', key: 'services' as const },
-  { href: '#galeria', key: 'gallery' as const },
-];
-
-const MOBILE_LINKS = [
-  ...LINKS,
-  { href: '/testimonios', key: 'testimonials' as const },
+const BASE_LINKS = [
+  { hash: '#sobre-mi', key: 'about' as const },
+  { hash: '#servicios', key: 'services' as const },
+  { hash: '#galeria', key: 'gallery' as const },
 ];
 
 export default function Header() {
   const { t } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const isSubpage = window.location.pathname.replace(/\/+$/, '') !== '';
+
+  const links = BASE_LINKS.map((l) => ({
+    href: isSubpage ? `/${l.hash}` : l.hash,
+    key: l.key,
+  }));
+
+  const mobileLinks = [
+    ...links,
+    { href: '/testimonios', key: 'testimonials' as const },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -40,7 +47,7 @@ export default function Header() {
             <img src="/images/logo.webp" alt="Miriam Tellez" width={480} height={480} fetchPriority="high" />
           </a>
           <nav className="header-nav" aria-label={t.mainNavAria}>
-            {LINKS.map((l) => (
+            {links.map((l) => (
               <a key={l.href} href={l.href}>
                 {t.nav[l.key]}
               </a>
@@ -66,7 +73,7 @@ export default function Header() {
 
       <div className={`mobile-menu ${open ? 'is-open' : ''}`}>
         <nav aria-label={t.mainNavAria}>
-          {MOBILE_LINKS.map((l, i) => (
+          {mobileLinks.map((l, i) => (
             <a key={l.href} href={l.href} style={{ transitionDelay: `${80 + i * 60}ms` }} onClick={close}>
               {t.nav[l.key]}
             </a>

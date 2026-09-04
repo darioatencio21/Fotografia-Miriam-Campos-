@@ -48,6 +48,8 @@ export default function Footer() {
   const { t } = useLang();
   const year = new Date().getFullYear();
   const rights = t.footer.rightsTemplate.replace('{year}', String(year));
+  const isSubpage = window.location.pathname.replace(/\/+$/, '') !== '';
+  const prefix = isSubpage ? '/' : '';
 
   return (
     <footer className="site-footer">
@@ -82,9 +84,9 @@ export default function Footer() {
             <img src="/images/logo.webp" alt="" width={480} height={480} loading="lazy" />
           </a>
           <nav className="footer-nav-inline" aria-label={t.footer.navigate}>
-            <a href="#sobre-mi">{t.nav.about}</a>
-            <a href="#servicios">{t.nav.services}</a>
-            <a href="#galeria">{t.nav.gallery}</a>
+            <a href={`${prefix}#sobre-mi`}>{t.nav.about}</a>
+            <a href={`${prefix}#servicios`}>{t.nav.services}</a>
+            <a href={`${prefix}#galeria`}>{t.nav.gallery}</a>
             <a href="/testimonios">{t.nav.testimonials}</a>
           </nav>
         </div>
