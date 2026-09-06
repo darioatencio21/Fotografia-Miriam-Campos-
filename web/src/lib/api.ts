@@ -185,7 +185,7 @@ export async function downloadInquiriesExcel(): Promise<void> {
   a.href = url;
   a.download = `solicitudes_${new Date().toISOString().slice(0, 10)}.xlsx`;
   a.click();
-  URL.revokeObjectURL(url);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 /* ---------- Fotos (subida desde el panel) ---------- */
