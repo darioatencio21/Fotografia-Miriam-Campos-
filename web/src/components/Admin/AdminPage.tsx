@@ -460,7 +460,7 @@ function InquiriesView({ loading, reload }: { loading: boolean; reload: () => Pr
             <span>{a.sumReceived}</span>
           </div>
           <div className="summary-card">
-            <strong>{summary.rate === null ? '—' : `${summary.rate}%`}</strong>
+            <strong>{summary.rate === null ? 'N/A' : `${summary.rate}%`}</strong>
             <span>{a.sumRate}</span>
           </div>
           <div className="summary-card">
@@ -687,7 +687,7 @@ function InquiriesView({ loading, reload }: { loading: boolean; reload: () => Pr
                 </>
               ) : (
                 <div className="admin-decision-note">
-                  <strong>{a.yourReply}</strong> {inq.admin_note || '—'}
+                  <strong>{a.yourReply}</strong> {inq.admin_note || 'N/A'}
                   {inq.responded_at && <em> ({fmtDateTime(inq.responded_at, lang)})</em>}
                 </div>
               )}

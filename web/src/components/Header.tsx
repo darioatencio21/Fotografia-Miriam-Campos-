@@ -41,8 +41,10 @@ export default function Header() {
 
   return (
     <>
-      <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
-        <div className="container header-inner">
+      <header
+        className={`site-header ${isSubpage ? 'is-solid' : 'is-home'} ${scrolled ? 'is-scrolled' : ''} ${open ? 'is-menu-open' : ''}`}
+      >
+        <div className="header-inner">
           <a className="brand" href="/" onClick={close} aria-label="Miriam Tellez">
             <img src="/images/logo.webp" alt="Miriam Tellez" width={480} height={480} fetchPriority="high" />
           </a>
@@ -54,7 +56,7 @@ export default function Header() {
             ))}
           </nav>
           <div className="header-actions">
-            <a className="btn btn-primary btn-sm" href="/reservar">
+            <a className="btn btn-primary btn-sm header-book" href="/reservar">
               {t.bookCta}
             </a>
             <LanguageSwitcher />
