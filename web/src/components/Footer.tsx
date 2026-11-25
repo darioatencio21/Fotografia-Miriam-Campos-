@@ -161,8 +161,8 @@ export default function Footer() {
               href="https://www.instagram.com/miriamtellezphotography/"
               target="_blank"
               rel="noreferrer"
-              aria-label="Instagram Â· @miriamtellezphotography"
-              title="Instagram Â· @miriamtellezphotography"
+              aria-label="Instagram · @miriamtellezphotography"
+              title="Instagram · @miriamtellezphotography"
             >
               <InstagramIcon />
             </a>
@@ -180,7 +180,7 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <div className="container footer-bottom-inner">
-          <span>Â© {rights}</span>
+          <span>© {rights}</span>
           <span className="footer-made">{t.footer.madeWith}</span>
         </div>
       </div>

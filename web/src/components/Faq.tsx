@@ -23,6 +23,18 @@ export default function Faq() {
 
   return (
     <section className="section faq" id="faq">
+      <div className="faq-scenery" aria-hidden="true">
+        <span className="faq-sun" />
+        <img
+          className="faq-hills"
+          src="/images/decor/montanas-doradas.webp"
+          alt=""
+          width={1280}
+          height={427}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
       <div className="container faq-container">
         <Reveal className="section-head faq-head">
           <Hummingbird />
@@ -47,8 +59,7 @@ export default function Faq() {
                     <span>{item.q}</span>
                     <span className="faq-icon" aria-hidden="true">
                       <svg viewBox="0 0 16 16" focusable="false">
-                        <path d="M2.5 8h11" />
-                        <path className="faq-icon-vertical" d="M8 2.5v11" />
+                        <path d="M8 3v10M4 9l4 4 4-4" />
                       </svg>
                     </span>
                   </button>

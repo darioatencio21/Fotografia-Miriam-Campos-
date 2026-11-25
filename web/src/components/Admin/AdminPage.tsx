@@ -104,16 +104,196 @@ function isoDay(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
+function GlobeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" />
+      <path
+        d="M3 12h18M12 3c2.6 2.4 4 5.5 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.5-4-9s1.4-6.6 4-9z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+      />
+    </svg>
+  );
+}
+
+function ExternalLinkIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function LogoutIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ChevronLeftIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M15 18l-6-6 6-6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ChevronRightIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M9 18l6-6-6-6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CalendarIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M18 6 6 18M6 6l12 12"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function MailIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM22 6l-10 7L2 6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function RefreshIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function StarIcon({ filled }: { filled: boolean }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className={filled ? 'is-filled' : ''}>
+      <path
+        d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"
+        fill={filled ? 'currentColor' : 'none'}
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function TrashIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v5M14 11v5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function LangToggle() {
   const { lang, setLang } = useLang();
   return (
     <span className="admin-lang-toggle" role="group" aria-label="ES / EN">
+      <GlobeIcon />
       {(['es', 'en'] as Lang[]).map((l) => (
         <button
           key={l}
           type="button"
           className={`chip ${lang === l ? 'is-active' : ''}`}
           onClick={() => setLang(l)}
+          aria-pressed={lang === l}
         >
           {l.toUpperCase()}
         </button>
@@ -226,14 +406,17 @@ export default function AdminPage() {
         <p className="admin-brand">{a.brand}</p>
         <div className="admin-header-actions">
           <LangToggle />
-          <a className="admin-header-site" href="/">
-            <span className="admin-header-site-icon" aria-hidden="true">
-              ↗
-            </span>
+          <a
+            className="admin-header-control admin-header-site"
+            href="/"
+            aria-label={a.viewSite}
+          >
+            <ExternalLinkIcon />
             <span className="admin-header-site-label">{a.viewSite}</span>
           </a>
-          <button className="admin-header-logout" type="button" onClick={logout}>
-            {a.logout}
+          <button className="admin-header-control admin-header-logout" type="button" onClick={logout}>
+            <LogoutIcon />
+            <span>{a.logout}</span>
           </button>
         </div>
       </header>
@@ -472,17 +655,31 @@ function InquiriesView({ loading, reload }: { loading: boolean; reload: () => Pr
 
       {/* Calendario mensual */}
       <section className="admin-calendar" aria-label={a.calAria}>
+        <p className="cal-eyebrow">{a.calAria}</p>
         <div className="cal-head">
-          <button type="button" onClick={() => shiftMonth(-1)} aria-label={a.prevMonth}>
-            ‹
-          </button>
-          <strong>
-            {MONTHS[lang][monthCursor.getMonth()]} {monthCursor.getFullYear()}
-          </strong>
-          <button type="button" onClick={() => shiftMonth(1)} aria-label={a.nextMonth}>
-            ›
-          </button>
+          <div className="cal-month">
+            <button
+              type="button"
+              className="cal-nav"
+              onClick={() => shiftMonth(-1)}
+              aria-label={a.prevMonth}
+            >
+              <ChevronLeftIcon />
+            </button>
+            <strong>
+              {MONTHS[lang][monthCursor.getMonth()]} {monthCursor.getFullYear()}
+            </strong>
+            <button
+              type="button"
+              className="cal-nav"
+              onClick={() => shiftMonth(1)}
+              aria-label={a.nextMonth}
+            >
+              <ChevronRightIcon />
+            </button>
+          </div>
           <button type="button" className="cal-today" onClick={() => setMonthCursor(new Date())}>
+            <CalendarIcon />
             {a.today}
           </button>
         </div>
@@ -521,8 +718,12 @@ function InquiriesView({ loading, reload }: { loading: boolean; reload: () => Pr
                 <span>{d.getDate()}</span>
                 {info && (
                   <span className="cal-dots" aria-hidden="true">
-                    {'●'.repeat(Math.min(info.accepted, 3))}
-                    {'○'.repeat(Math.min(info.pending, 3))}
+                    {Array.from({ length: Math.min(info.accepted, 3) }, (_, i) => (
+                      <i key={`a${i}`} className="cal-dot is-accepted" />
+                    ))}
+                    {Array.from({ length: Math.min(info.pending, 3) }, (_, i) => (
+                      <i key={`p${i}`} className="cal-dot is-pending" />
+                    ))}
                   </span>
                 )}
               </button>
@@ -530,16 +731,21 @@ function InquiriesView({ loading, reload }: { loading: boolean; reload: () => Pr
           })}
         </div>
         <p className="cal-legend">
-          <span className="dot dot-full">●</span> {a.legendAccepted}{' '}
-          <span className="dot dot-empty">○</span> {a.legendPending}
+          <span className="cal-legend-item">
+            <i className="dot dot-full" aria-hidden="true" />
+            {a.legendAccepted}
+          </span>
+          <span className="cal-legend-item">
+            <i className="dot dot-empty" aria-hidden="true" />
+            {a.legendPending}
+          </span>
           {selectedDay && (
-            <>
-              {' · '}
-              {a.showing} <strong>{fmtDay(selectedDay, lang)}</strong>{' '}
+            <span className="cal-legend-selected">
+              {a.showing} <strong>{fmtDay(selectedDay, lang)}</strong>
               <button type="button" className="cal-clear" onClick={() => setSelectedDay(null)}>
                 {a.seeAll}
               </button>
-            </>
+            </span>
           )}
         </p>
         {selectedDay && dayInquiries.length > 0 && (
@@ -548,8 +754,13 @@ function InquiriesView({ loading, reload }: { loading: boolean; reload: () => Pr
               <strong>
                 {a.dayPanelFor} {fmtDay(selectedDay, lang)}
               </strong>
-              <button type="button" onClick={() => setSelectedDay(null)} aria-label={a.dayPanelClose}>
-                ✕
+              <button
+                type="button"
+                className="cal-close"
+                onClick={() => setSelectedDay(null)}
+                aria-label={a.dayPanelClose}
+              >
+                <CloseIcon />
               </button>
             </div>
             <ul>
@@ -604,6 +815,7 @@ function InquiriesView({ loading, reload }: { loading: boolean; reload: () => Pr
           </select>
         </label>
         <button type="button" className="chip admin-refresh" onClick={() => void reload()} disabled={loading}>
+          <RefreshIcon />
           {a.refresh}
         </button>
         <button
@@ -638,25 +850,41 @@ function InquiriesView({ loading, reload }: { loading: boolean; reload: () => Pr
       {visible.map((inq) => (
         <article key={inq.id} className={`admin-card status-${inq.status}`}>
           <div className="admin-card-top">
-            <span className={`status-badge is-${inq.status}`}>{a.statusLabels[inq.status]}</span>
-            <span className="admin-lang-chip">{inq.lang === 'en' ? 'EN' : 'ES'}</span>
+            <div className="admin-card-meta">
+              <span className={`status-badge is-${inq.status}`}>{a.statusLabels[inq.status]}</span>
+              <span className="admin-lang-chip">{inq.lang === 'en' ? 'EN' : 'ES'}</span>
+            </div>
             <time>{fmtDateTime(inq.created_at, lang)}</time>
           </div>
 
-          <div className="admin-card-main">
-            <h2>{inq.name}</h2>
-            <p className="admin-session">{inq.session_type}</p>
-            {inq.event_date && (
-              <p className="admin-date">📅 {fmtDay(inq.event_date, lang)}</p>
-            )}
+          <div className="admin-card-body">
+            <div className="admin-card-main">
+              <h2>{inq.name}</h2>
+              <p className="admin-session">{inq.session_type}</p>
+              {inq.event_date && (
+                <p className="admin-date">
+                  <CalendarIcon />
+                  {fmtDay(inq.event_date, lang)}
+                </p>
+              )}
+            </div>
             <ul className="admin-contact">
               <li>
-                <a href={`mailto:${inq.email}`}>{inq.email}</a>
+                <a href={`mailto:${inq.email}`}>
+                  <MailIcon />
+                  {inq.email}
+                </a>
               </li>
-              {inq.phone && <li>📞 {inq.phone}</li>}
+              {inq.phone && (
+                <li>
+                  <PhoneIcon />
+                  {inq.phone}
+                </li>
+              )}
             </ul>
-            <blockquote>{inq.message}</blockquote>
           </div>
+
+          <blockquote>{inq.message}</blockquote>
 
           {(inq.status === 'pending' || inq.admin_note) && (
             <footer className="admin-card-footer">
@@ -668,22 +896,24 @@ function InquiriesView({ loading, reload }: { loading: boolean; reload: () => Pr
                   >
                     {a.contactBtn}
                   </a>
-                  <button
-                    type="button"
-                    className="btn btn-accept"
-                    disabled={busyId === inq.id}
-                    onClick={() => accept(inq)}
-                  >
-                    {a.acceptBtn}
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-reject"
-                    disabled={busyId === inq.id}
-                    onClick={() => openReject(inq.id)}
-                  >
-                    {a.rejectBtn}
-                  </button>
+                  <div className="admin-decision-actions">
+                    <button
+                      type="button"
+                      className="btn btn-accept"
+                      disabled={busyId === inq.id}
+                      onClick={() => accept(inq)}
+                    >
+                      {a.acceptBtn}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-reject"
+                      disabled={busyId === inq.id}
+                      onClick={() => openReject(inq.id)}
+                    >
+                      {a.rejectBtn}
+                    </button>
+                  </div>
                 </>
               ) : (
                 <div className="admin-decision-note">
@@ -807,6 +1037,73 @@ function ReviewsView() {
   const pending = reviews.filter((r) => !r.approved);
   const published = reviews.filter((r) => r.approved);
 
+  function ReviewCard({ r }: { r: AdminTestimonial }) {
+    const busy = busyId === r.id;
+
+    function toggle(approved: boolean) {
+      void act(
+        () => adminSetTestimonialApproved(r.id, approved),
+        approved
+          ? fill(a.revPublishedFlash, { name: r.author })
+          : fill(a.revHiddenFlash, { name: r.author }),
+        r.id
+      );
+    }
+
+    return (
+      <article className={`admin-card review-card ${r.approved ? 'status-accepted' : 'status-pending'}`}>
+        <div className="review-card-head">
+          <span className="review-stars" role="img" aria-label={fill(a.ratingAria, { n: r.rating })}>
+            {Array.from({ length: 5 }, (_, i) => (
+              <StarIcon key={i} filled={i < r.rating} />
+            ))}
+          </span>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={r.approved}
+            aria-label={fill(a.reviewToggleAria, { name: r.author })}
+            className={`review-switch ${r.approved ? 'is-on' : ''}`}
+            disabled={busy}
+            onClick={() => toggle(!r.approved)}
+          >
+            <span className="review-switch-track" aria-hidden="true">
+              <span className="review-switch-thumb" />
+            </span>
+            <span className="review-switch-label">{r.approved ? a.reviewOn : a.reviewOff}</span>
+          </button>
+        </div>
+        <blockquote>“{r.quote}”</blockquote>
+        <footer className="review-foot">
+          <span className="review-author">
+            <span className="review-avatar" aria-hidden="true">
+              {r.author.charAt(0).toUpperCase()}
+            </span>
+            <span className="review-author-info">
+              <strong>{r.author}</strong>
+              <time>{fmtDateTime(r.created_at, lang)}</time>
+            </span>
+          </span>
+          {!r.approved && (
+            <button
+              type="button"
+              className="btn btn-reject btn-sm"
+              disabled={busy}
+              onClick={() => {
+                if (window.confirm(fill(a.confirmDiscard, { name: r.author }))) {
+                  void act(() => adminDeleteTestimonial(r.id), a.revDiscardedFlash, r.id);
+                }
+              }}
+            >
+              <TrashIcon />
+              {a.discard}
+            </button>
+          )}
+        </footer>
+      </article>
+    );
+  }
+
   return (
     <main className="admin-container">
       {flash && (
@@ -825,50 +1122,7 @@ function ReviewsView() {
         <>
           <h2 className="admin-section-title">{fill(a.revPendingTitle, { n: pending.length })}</h2>
           {pending.map((r) => (
-            <article key={r.id} className="admin-card review-card status-pending">
-              <div className="review-stars" aria-hidden="true">
-                {'★'.repeat(r.rating)}
-                <span className="review-stars-off">{'★'.repeat(5 - r.rating)}</span>
-              </div>
-              <blockquote>“{r.quote}”</blockquote>
-              <footer className="review-foot">
-                <span>
-                  <strong>{r.author}</strong> · {fmtDateTime(r.created_at, lang)}
-                </span>
-                <span className="review-actions">
-                  <button
-                    type="button"
-                    className="btn btn-accept"
-                    disabled={busyId === r.id}
-                    onClick={() =>
-                      void act(
-                        () => adminSetTestimonialApproved(r.id, true),
-                        fill(a.revPublishedFlash, { name: r.author }),
-                        r.id
-                      )
-                    }
-                  >
-                    {a.publish}
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-reject"
-                    disabled={busyId === r.id}
-                    onClick={() => {
-                      if (window.confirm(fill(a.confirmDiscard, { name: r.author }))) {
-                        void act(
-                          () => adminDeleteTestimonial(r.id),
-                          a.revDiscardedFlash,
-                          r.id
-                        );
-                      }
-                    }}
-                  >
-                    {a.discard}
-                  </button>
-                </span>
-              </footer>
-            </article>
+            <ReviewCard key={r.id} r={r} />
           ))}
         </>
       )}
@@ -880,34 +1134,7 @@ function ReviewsView() {
           </h2>
           {published.length === 0 && <p className="admin-empty">{a.revEmpty}</p>}
           {published.map((r) => (
-            <article key={r.id} className="admin-card review-card status-accepted">
-              <div className="review-stars" aria-hidden="true">
-                {'★'.repeat(r.rating)}
-                <span className="review-stars-off">{'★'.repeat(5 - r.rating)}</span>
-              </div>
-              <blockquote>“{r.quote}”</blockquote>
-              <footer className="review-foot">
-                <span>
-                  <strong>{r.author}</strong> · {fmtDateTime(r.created_at, lang)}
-                </span>
-                <span className="review-actions">
-                  <button
-                    type="button"
-                    className="btn btn-outline btn-sm"
-                    disabled={busyId === r.id}
-                    onClick={() =>
-                      void act(
-                        () => adminSetTestimonialApproved(r.id, false),
-                        fill(a.revHiddenFlash, { name: r.author }),
-                        r.id
-                      )
-                    }
-                  >
-                    {a.hideFromSite}
-                  </button>
-                </span>
-              </footer>
-            </article>
+            <ReviewCard key={r.id} r={r} />
           ))}
         </>
       )}
